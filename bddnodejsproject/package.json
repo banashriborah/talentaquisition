@@ -1,0 +1,13 @@
+{
+  "name": "moneycorp-test",
+  "version": "1.0.0",
+  "description": "MoneyCorp Website Testing",
+  "scripts": {
+    "test": "cucumber-js --require ./step_definitions && node report.js"
+  },
+  "devDependencies": {
+    "cucumber": "^6.0.7",
+    "cucumber-html-reporter": "^6.0.0",
+    "selenium-webdriver": "^4.1.0"
+  }
+}

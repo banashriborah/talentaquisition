@@ -1,0 +1,40 @@
+
+
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.cucumber:cucumber-java:7.0.0'
+    implementation 'io.cucumber:cucumber-junit:7.0.0'
+    implementation 'io.cucumber:cucumber-core:7.0.0'
+    implementation 'io.cucumber:cucumber-gherkin:7.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'io.rest-assured:rest-assured:4.4.0'
+    implementation 'org.hamcrest:hamcrest:2.2'
+    implementation 'org.json:json:20210307'
+
+
+}
+
+task runBoredUi(type: JavaExec) {
+    classpath = sourceSets.test.runtimeClasspath
+    main = 'io.cucumber.core.cli.Main'
+    args = [
+            '--plugin', 'pretty',
+            '--plugin', 'html:target/cucumber-reports.html',
+            '--glue', 'com.example.steps',
+            'src/test/resources/features'
+    ]
+}
+
+test {
+    useJUnit()
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
