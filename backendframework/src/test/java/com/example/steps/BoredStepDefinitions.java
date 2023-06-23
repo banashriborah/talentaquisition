@@ -8,6 +8,10 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import org.json.JSONObject;
+import org.junit.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoredStepDefinitions {
 
@@ -17,8 +21,10 @@ public class BoredStepDefinitions {
     private static final String BASE_URL = "https://www.boredapi.com/api/";
 
     private String appropriateSuggestions;
+    private List<String> myList;
     public static Response getSuggestedActivities(int count, String type) {
         String endpoint = BASE_URL + "activity?type=" + type + "&participants="+Integer.toString(count);
+        System.out.println(endpoint);
         return given()
                 .when()
                 .get(endpoint);
@@ -31,20 +37,33 @@ public class BoredStepDefinitions {
 
     @When("request {} activities for {} people with type social")
     public void iRequestActivitiesForPeopleWithTypeSocial(int  numberOfActivities, int countOfPeople) {
-        for (int i = 0; i <= numberOfActivities; i++) {
+
+        myList = new ArrayList<>();
+
+        while (myList.size() < numberOfActivities) {
             response = getSuggestedActivities(countOfPeople, this.type);
             JsonPath jsonPath = response.jsonPath();
-            String value = jsonPath.get("activity");
-            System.out.println("Value: " + value);
-            appropriateSuggestions=appropriateSuggestions+value;
+            String activity = jsonPath.get("activity");
 
-
+            if (!myList.contains(activity)) {
+                myList.add(activity);
+            } else {
+                System.out.println(myList);
+                System.out.println("Element already exists in the list. Please enter a unique element.");
+            }
         }
+        System.out.println("List size reached "+Integer.toString(numberOfActivities)+" Elements: " + myList);
+        Assert.assertEquals(myList.size(),numberOfActivities);
 
     }
+
+
     @Then("should receive appropriate suggestions")
     public void iShouldReceiveAppropriateSuggestions() {
-        System.out.println(appropriateSuggestions);
+        for (String suggestions : myList) {
+            String str = String.valueOf(suggestions);
+            System.out.println("activity: " + str);
+        }
 
     }
 

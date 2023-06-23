@@ -14,6 +14,7 @@
     └── features
         └── boredapi.feature
 
+![img_6.png](img_6.png)
 To run 
 
 just run the task by right click on intellij or on gradle command line 
@@ -22,7 +23,7 @@ just run the task by right click on intellij or on gradle command line
 
 Attaching test execution report for the test result and console output
 
-![img_4.png](img_4.png)
+![img_7.png](img_7.png)
 
 
-![img_5.png](img_5.png)
+![img_9.png](img_9.png)
