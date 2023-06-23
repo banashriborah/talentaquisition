@@ -68,29 +68,30 @@ public class StepDefinitions {
 
 
     @And("click show more results until not available")
-    public void clickShowMoreResultsUntilNotAvailable() {
+    public void clickShowMoreResultsUntilNotAvailable() throws InterruptedException {
         homePage.clickUntilNotVisibile();
     }
 
 
     @Then("verify all articles has link starting with")
-    public void verifyAllArticlesHasLinkStartingWith() {
+    public void verifyAllArticlesHasLinkStartingWith() throws InterruptedException {
         homePage.validateLinks();
     }
 
+    @And("i close browser")
+    public void iCloseBrowser() {
+        driver.quit();
+    }
 
-//    @Then("I close the browser")
-//    public void closeTheBrowser() {
-//        driver.quit();
-//    }
-//
-//    @After
-//    public void tearDown() {
-//        // Quit the WebDriver instance after each scenario
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
+
+    @After
+    public void tearDown() {
+        // Quit the WebDriver instance after each scenario
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
 
 
 }

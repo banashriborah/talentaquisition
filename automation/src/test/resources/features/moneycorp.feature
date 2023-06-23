@@ -11,5 +11,6 @@ Feature: MoneyCorp Website Testing
     Then validate result page is arrived
     And click show more results until not available
     Then verify all articles has link starting with
+    And i close browser
 
 
