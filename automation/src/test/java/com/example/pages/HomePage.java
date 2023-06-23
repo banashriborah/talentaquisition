@@ -113,7 +113,7 @@ public class HomePage {
 
     }
 
-    public void clickUntilNotVisibile() {
+    public void clickUntilNotVisibile() throws InterruptedException {
 
         js = (JavascriptExecutor) driver;
         wait = new WebDriverWait(driver, 20);
@@ -129,34 +129,32 @@ public class HomePage {
             js.executeScript("arguments[0].click();", element);
             // Wait for 5 seconds
             try {
-                sleep(10);
+                sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
             // Check if the element is still visible
             isElementVisible = !driver.findElements(showMoreResults).isEmpty();
+            sleep(3000);
 
 
         }
 
     }
 
-    public void validateLinks() {
+    public void validateLinks() throws InterruptedException {
         // Find all the articles on the page
-        List<WebElement> articles = driver.findElements(By.xpath("//div[@class='results-wrapper']//div[@class='text']"));
-
+        List<WebElement> articles = driver.findElements(By.xpath("//div[@class='results-wrapper']//div[@class='results']//a"));
         // Iterate through each article and validate the link
         for (WebElement article : articles) {
-            WebElement link = article.findElement(By.tagName("a"));
-            String href = link.getAttribute("href");
-            if (href.startsWith("https://www.moneycorp.com/en-us/")) {
-                System.out.println("Link validation passed for: " + href);
+            String href = article.getAttribute("href");
+            if (href != null && href.startsWith("https://www.moneycorp.com/en-us/")) {
+                System.out.println("Link is valid: " + href);
             } else {
-                System.out.println("Link validation failed for: " + href);
+                System.out.println("Link is invalid: " + href);
             }
-        }
+
+        } System.out.println(articles.size());
 
     }
 
