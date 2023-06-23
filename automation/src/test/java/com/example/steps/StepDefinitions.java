@@ -3,12 +3,14 @@ package com.example.steps;
 import com.example.pages.HomePage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
 import static org.junit.Assert.assertTrue;
 
 public class StepDefinitions {
@@ -31,42 +33,64 @@ public class StepDefinitions {
         homePage.openMoneyCorpWebsite();
     }
 
-    @When("change the language and region to {} {}")
-    public void iChangeTheLanguageAndRegionTo(String language, String region) throws InterruptedException {
-        homePage.changeLanguageAndRegion(language, region);
+
+    @When("change the language and region to USA\\(English)")
+    public void changeTheLanguageAndRegionToUSAEnglish() throws InterruptedException {
+        homePage.changeRegion();
+    }
+
+    @Then("verify the region is displayed")
+    public void verifyTheRegionIsDisplayed() throws InterruptedException {
+        homePage.isusaDisplayed();
     }
 
 
-    @Then("should be on the result page {}")
-    public void iShouldBeOnTheResultPage(String region) throws InterruptedException {
-        assertTrue(homePage.isResultPageDisplayed(region));
-    }
-
-    @When("I click on 'Find out more' for Foreign exchange solutions")
-    public void clickFindOutMoreForForeignExchangeSolutions() throws InterruptedException {
-        homePage.clickFindOutMoreForForeignExchangeSolutions();
-    }
-
-    @When("I search for the word {string}")
-    public void searchForKeyword(String keyword) throws InterruptedException {
-        homePage.searchForKeyword(keyword);
-    }
-
-    @Then("I close the browser")
-    public void closeTheBrowser() {
-        driver.quit();
-    }
-
-    @After
-    public void tearDown() {
-        // Quit the WebDriver instance after each scenario
-        if (driver != null) {
-            driver.quit();
-        }
+    @And("click on find out more for Foreign exchange Solutions")
+    public void clickOnFindOutMoreForForeignExchangeSolutions() throws InterruptedException {
+        homePage.clickOnFindOutMore();
     }
 
 
-    @Then("I should be on the result page")
-    public void iShouldBeOnTheResultPage() {
+    @Then("validate right page is arrived")
+    public void validateRightPageIsArrived() {
+        homePage.untilPageIsDisplayed();
     }
+
+    @And("click on searchbox to find internationalpayments")
+    public void clickOnSearchboxToFindInternationalpayments() {
+        homePage.clickOnSearchboxAndEnterText("international payments");
+    }
+
+    @Then("validate result page is arrived")
+    public void validateResultPageIsArrived() {
+        homePage.resultPageArrived();
+    }
+
+
+    @And("click show more results until not available")
+    public void clickShowMoreResultsUntilNotAvailable() {
+        homePage.clickUntilNotVisibile();
+    }
+
+
+    @Then("verify all articles has link starting with")
+    public void verifyAllArticlesHasLinkStartingWith() {
+        homePage.validateLinks();
+    }
+
+
+//    @Then("I close the browser")
+//    public void closeTheBrowser() {
+//        driver.quit();
+//    }
+//
+//    @After
+//    public void tearDown() {
+//        // Quit the WebDriver instance after each scenario
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
+
+
 }
