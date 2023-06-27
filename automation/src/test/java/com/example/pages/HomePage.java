@@ -13,25 +13,23 @@ import java.util.Properties;
 import static java.lang.Thread.sleep;
 
 public class HomePage {
-    private WebDriver driver;
+    private static final String MONEYCORP_URL = "https://www.moneycorp.com/en-gb/";
     private static Properties properties;
-
+    private WebDriver driver;
     private JavascriptExecutor js;
-
-    public HomePage() {
-        properties = new Properties();
-        try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties");
-            properties.load(inputStream);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private static final String MONEYCORP_URL ="https://www.moneycorp.com/en-gb/";
-
     private WebDriverWait wait;
+
+//    public HomePage() {
+//
+//        properties = new Properties();
+//        try {
+//            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties");
+//            properties.load(inputStream);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -120,14 +118,14 @@ public class HomePage {
         By showMoreResults = By.xpath("//a[contains(text(),'Show more results')]");
         boolean isElementVisible = true;
         int counter = 0;
-        while (isElementVisible && counter<3 ) {
+        while (isElementVisible && counter < 3) {
             counter++;
             System.out.println(counter);
             // Wait for the element to be visible
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(showMoreResults));
             js.executeScript("arguments[0].scrollIntoView(true);", element);
             js.executeScript("arguments[0].click();", element);
-            // Wait for 5 seconds
+            // Wait for 2 seconds
             try {
                 sleep(2000);
             } catch (InterruptedException e) {
@@ -154,7 +152,8 @@ public class HomePage {
                 System.out.println("Link is invalid: " + href);
             }
 
-        } System.out.println(articles.size());
+        }
+        System.out.println(articles.size());
 
     }
 
