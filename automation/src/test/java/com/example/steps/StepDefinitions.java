@@ -1,5 +1,6 @@
 package com.example.steps;
 
+import com.example.manage.SeleniumDriverSingleton;
 import com.example.pages.HomePage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -8,10 +9,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-
-import static org.junit.Assert.assertTrue;
 
 public class StepDefinitions {
     private WebDriver driver;
@@ -19,13 +16,22 @@ public class StepDefinitions {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("start-maximized");
-        options.addArguments("--enable-notifications");
-        driver = new ChromeDriver(options);
+        /**
+         * ithout singleton class implement the below changes
+         */
+//        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--remote-allow-origins=*");
+//        options.addArguments("start-maximized");
+//        options.addArguments("--enable-notifications");
+//        driver = new ChromeDriver(options);
+        /**
+         * implemeted singleton class for now memory leakage
+         */
+        driver = SeleniumDriverSingleton.getDriver();
         homePage = new HomePage(driver);
+
+
     }
 
     @Given("open the MoneyCorp website")
@@ -86,12 +92,12 @@ public class StepDefinitions {
 
     @After
     public void tearDown() {
-        // Quit the WebDriver instance after each scenario
-        if (driver != null) {
-            driver.quit();
-        }
+//        // Quit the WebDriver instance after each scenario
+//        if (driver != null) {
+//            driver.quit();
+//        }
+        SeleniumDriverSingleton.quitDriver();
     }
-
 
 
 }

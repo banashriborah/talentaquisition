@@ -16,6 +16,8 @@ dependencies {
     implementation 'io.cucumber:cucumber-gherkin:7.0.0'
     testImplementation 'junit:junit:4.13.2'
     implementation 'org.seleniumhq.selenium:selenium-server:3.141.59'
+    implementation 'com.aventstack:extentreports:5.0.8'
+    implementation 'com.vimalselvam:cucumber-extentsreport:3.1.1'
 
 
 }

@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features/moneycorp.feature",
         glue = "com.example.steps",
         plugin = {"html:target/cucumber-reports.html"},
+        monochrome = true,
         tags = "@question2"
 )
 public class TestRunner {

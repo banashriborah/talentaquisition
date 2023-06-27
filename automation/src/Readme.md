@@ -1,19 +1,19 @@
     project
     └── src
     └── test
-    ├── java
-    │   └── com
-    │       └── example
-    │           ├── pages
-    │           │   └── HomePage.java
-    │           ├── runner
-    │           │   └── TestRunner.java
-    │           └── steps
-    │               └── StepDefinitions.java
-    └── resources
-    ├── application.properties
-    └── features
-    └── moneycorp.feature
+        ├── java
+        │   └── com
+        │       └── example
+        │           ├── pages
+        │           │   └── HomePage.java
+        │           ├── runner
+        │           │   └── TestRunner.java
+        │           └── steps
+        │               └── StepDefinitions.java
+        └── resources
+        ├── application.properties
+        └── features
+        └── moneycorp.feature
 
 To run 
 
